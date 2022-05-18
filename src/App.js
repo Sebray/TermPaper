@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from 'react-router-dom';
+
+import {HomePage} from './pages/HomePage';
+import {AboutPage} from './pages/AboutPage';
+import {NotFoundPage} from './pages/NotFoundPage';
+import {LoginPage} from './pages/LoginPage'
+import {SignUpPage} from './pages/SignUpPage'
+import {ResumesPage} from './pages/ResumesPage'
+import {VacanciesPage} from './pages/VacanciesPage'
+import {Layout} from './components/Layout'
+import {AuthProvider} from "./hocs/AuthProvider";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <AuthProvider>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route index element={<HomePage/>}/>
+                    <Route path="/about" element={<AboutPage/>}/>
+                    <Route path="*" element={<NotFoundPage/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/signup" element={<SignUpPage/>}/>
+                    <Route path="/resumes" element={<ResumesPage/>}/>
+                    <Route path="/vacancies" element={<VacanciesPage/>}/>
+                </Route>
+            </Routes>
+        </AuthProvider>
+    );
 }
 
 export default App;
