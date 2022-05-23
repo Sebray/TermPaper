@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Button, Form} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {DataProviderUsers} from "../services/DataProviderUsers";
 import {useAuth} from "../hooks/useAuth"
 import {useNavigate} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/css/bootstrap.min.css"
+import StepOne from "../components/forms/StepOne";
 const LoginPage = () => {
     const {signIn} = useAuth();
     const navigate = useNavigate();
@@ -49,38 +50,40 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="container">
-            <div className=" row justify-content-center">
-                <Form noValidate validated={validated} className="mt-5 shadow-lg rounded-3"
-                      style={{maxWidth: "50%"}} onSubmit={handleSubmit} onClick={changeError}>
-                    <h2>Вход</h2>
-                    {error && <span className="mb-3" style={{color:"red"}}>Введён неправильный логин или пароль</span>}
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Электронная почта</Form.Label>
-                        <Form.Control name="email" onChange={handleChange}
-                                      type="email" placeholder="Введите электронную почту"
-                                      required/>
-                        <Form.Control.Feedback type="invalid">
-                            Введите корректный адрес электронной почты
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Пароль</Form.Label>
-                        <Form.Control name="password" onChange={handleChange}
-                                      type="password" placeholder="Пароль"
-                                      required/>
-                        <Form.Control.Feedback type="invalid">
-                            Введите пароль
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Button className="mb-3" variant="primary" type="submit">
-                        Войти
-                    </Button>
-                </Form>
-            </div>
-        </div>
-
-
+        <Container>
+            <Row>
+                <Col  md={{ span: 4, offset: 4 }} className="custom-margin">
+                    <Card className="" style={{marginTop:"15%"}} >
+                        <Form noValidate validated={validated}  className="was-validated px-2 shadow-lg rounded-3"
+                              onSubmit={handleSubmit} onClick={changeError}>
+                            <h2>Вход</h2>
+                            {error && <span className="mb-3" style={{color:"red"}}>Введён неправильный логин или пароль</span>}
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Электронная почта</Form.Label>
+                                <Form.Control name="email" onChange={handleChange}
+                                              type="email" placeholder="Введите электронную почту"
+                                              required/>
+                                <Form.Control.Feedback type="invalid">
+                                    Введите корректный адрес электронной почты
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Пароль</Form.Label>
+                                <Form.Control name="password" onChange={handleChange}
+                                              type="password" placeholder="Пароль"
+                                              required/>
+                                <Form.Control.Feedback type="invalid">
+                                    Введите пароль
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <Button className="mb-3 float-end"  variant="primary" type="submit">
+                                Войти
+                            </Button>
+                        </Form>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

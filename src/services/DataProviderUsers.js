@@ -43,12 +43,12 @@ export class DataProviderUsers {
 
 
 
-     static getUserByrEmailAndPassword = (login, password) => {
+     static getUserByrEmailAndPassword = (email, password) => {
        return new Promise((resolve, reject) => {
-         const result = this.users.filter((user) => user.email === login && user.password === password);
+         const result = this.users.filter((user) => user.email === email && user.password === password);
 
          if (result.length === 0) {
-           reject(`user с login, password ${login} не найдено`);
+           reject(`user с email, password ${email} не найдено`);
          }
          resolve(result[0]);
        });
@@ -80,7 +80,6 @@ export class DataProviderUsers {
 
         return Promise.resolve(newUserIndex);
     };
-
 
     static deleteUser = (id) => {
         return new Promise((resolve, reject) => {
